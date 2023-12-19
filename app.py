@@ -4,13 +4,12 @@ import numpy as np
 import plotly.express as px
 
 
-@st.cache
+@st.cache_data
 def load_data():
     df = pd.read_csv("./data/sf_budget_2022-25_cleaned.csv")
     return df
 
 
-# Function for data overview
 def data_overview(df):
     info_df = pd.DataFrame(index=df.columns)
     info_df["DataType"] = df.dtypes
