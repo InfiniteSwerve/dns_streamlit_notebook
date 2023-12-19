@@ -10,6 +10,21 @@ def load_data():
     return df
 
 
+# Function for data overview
+def data_overview(df):
+    info_df = pd.DataFrame(index=df.columns)
+    info_df["DataType"] = df.dtypes
+    info_df["Count"] = df.count()
+    info_df["Missing Values"] = df.isnull().sum()
+    info_df["Unique Values"] = df.nunique()
+
+    int_columns = df.select_dtypes(include="int").columns
+    info_df.loc[int_columns, "Min Value"] = df[int_columns].min()
+    info_df.loc[int_columns, "Max Value"] = df[int_columns].max()
+
+    return info_df
+
+
 def display_data_overview(df):
     st.write("## Data Overview")
     info_df = data_overview(df)
